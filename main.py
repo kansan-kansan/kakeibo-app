@@ -1,20 +1,22 @@
 import datetime
 from pathlib import Path
 import pandas as pd
+import re
+import openpyxl as excel
 
 now = datetime.datetime.now()
-this_year = now.year
-this_month = now.month
-this_day = now.day
+this_year = now.strftime('%Y')
+this_month = now.strftime('%m')
+this_day = now.strftime('%d')
 
 class Core:
     def Register(self,path_to_file,enter_month): #登録処理
         while True:
             date = str(input("日付は今日ですか? y or n>>"))
             if date == "y":
-                enter_day = now.day
+                enter_day = this_day
                 break
-            elif date == "n":
+            elif date == "n":       #正規表現
                 enter_day = int(input("日付を入力>>"))
                 break
             else:
@@ -38,7 +40,7 @@ class Core:
             with open (path_to_file,mode="a",encoding="utf-8") as file:
                 enter_day = str(enter_day)
                 enter_month = str(enter_month)
-                file.write(f"\n{enter_month}/{enter_day},{value_goods},{money},{value_payment},{this_month}/{this_day}")
+                file.write(f"\n{enter_month}-{enter_day},{value_goods},{money},{value_payment},{this_month}-{this_day}")
                 file.write("")
                 
         
