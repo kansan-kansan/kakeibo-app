@@ -7,6 +7,7 @@ def btn_click():
 
     print(goods.get())
     print(payment.get())
+
     print(money.get())
     print(type(money.get()))
 
